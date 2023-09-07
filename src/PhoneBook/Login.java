@@ -1,3 +1,9 @@
+/*
+ * Filename Login.java
+ * Written by Divya Rasania
+ * Written on 9/6/2023
+ */
+
 package PhoneBook;
 
 import javax.swing.*;
@@ -10,92 +16,100 @@ public class Login extends JFrame implements ActionListener {
         new Login().setVisible(true);
     }
 
-    JLabel l1, l2, l3, l4;
-    JTextField tf;
-    JPasswordField pf;
-    JPanel p1, p2, p3;
-    JButton b1, b2;
-    Font f1, f2;
+    JLabel welcomeLabel, usernameLabel, passwordLabel, iconLabel;
+    JTextField usernameTextField;
+    JPasswordField passwordTextField;
+    JPanel loginPanel, headingPanel, iconPanel;
+    JButton loginButton, cancelButton;
+    Font font1, font2;
 
     Login() {
-        f1 = new Font("Arial", Font.BOLD, 25);
-        f2 = new Font("Arial", Font.BOLD, 18);
-        l1 = new JLabel("Welcome to PhoneBook");
-        l2 = new JLabel("Username");
-        l3 = new JLabel("Password");
-        tf = new JTextField();
-        pf = new JPasswordField();
-        b1 = new JButton("Login");
-        b2 = new JButton("Cancel");
-        ImageIcon tempImg1 = new ImageIcon(ClassLoader.getSystemResource("phonebookImg.png"));
+        font1 = new Font("Calibri", Font.BOLD, 25);
+        font2 = new Font("Calibri", Font.BOLD, 18);
+        welcomeLabel = new JLabel("Welcome to PhoneBook");
+        usernameLabel = new JLabel("Username");
+        passwordLabel = new JLabel("Password");
+        usernameTextField = new JTextField();
+        passwordTextField = new JPasswordField();
+        loginButton = new JButton("Login");
+        cancelButton = new JButton("Cancel");
+        ImageIcon tempImg1 = new ImageIcon(ClassLoader.getSystemResource("Resources/Images/user.png"));
         Image tempImg2 = tempImg1.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-        ImageIcon img = new ImageIcon(tempImg2);
-        l4 = new JLabel(img);
-        p1 = new JPanel();
-        p2 = new JPanel();
-        p3 = new JPanel();
+        ImageIcon userIcon = new ImageIcon(tempImg2);
+        ImageIcon tempImg3 = new ImageIcon(ClassLoader.getSystemResource("Resources/Images/login.png"));
+        Image loginIcon = tempImg3.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        iconLabel = new JLabel(userIcon);
+        loginPanel = new JPanel();
+        headingPanel = new JPanel();
+        iconPanel = new JPanel();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Login PhoneBook");
         setLocation(400, 300);
-        setSize(550, 250);
-        setIconImage(tempImg2);
+        setSize(530, 250);
+        setIconImage(loginIcon);
         setResizable(false);
 
-        l1.setHorizontalAlignment(JLabel.CENTER);
-        l1.setFont(f1);
+        welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
+        welcomeLabel.setFont(font1);
 
-        l2.setFont(f2);
+        usernameLabel.setFont(font2);
 
-        l3.setFont(f2);
+        passwordLabel.setFont(font2);
 
-        tf.setFont(f2);
+        usernameTextField.setFont(font2);
 
-        pf.setFont(f2);
+        passwordTextField.setFont(font2);
 
-        b1.addActionListener(this);
-        b1.setFont(f2);
+        loginButton.addActionListener(this);
+        loginButton.setFont(font2);
 
-        b2.addActionListener(this);
-        b2.setFont(f2);
+        cancelButton.addActionListener(this);
+        cancelButton.setFont(font2);
 
-        p1.setLayout(new GridLayout(3 ,2, 10, 10));
-        p1.add(l2);
-        p1.add(tf);
-        p1.add(l3);
-        p1.add(pf);
-        p1.add(b1);
-        p1.add(b2);
+        loginPanel.setLayout(new GridLayout(3 ,2, 10, 10));
+        loginPanel.add(usernameLabel);
+        loginPanel.add(usernameTextField);
+        loginPanel.add(passwordLabel);
+        loginPanel.add(passwordTextField);
+        loginPanel.add(loginButton);
+        loginPanel.add(cancelButton);
 
-        p2.setLayout(new GridLayout(1, 1, 10, 10));
-        p2.add(l1);
+        headingPanel.setLayout(new GridLayout(1, 1, 10, 10));
+        headingPanel.add(welcomeLabel);
 
-        p3.setLayout(new GridLayout(1, 1, 10, 10));
-        p3.add(l4);
+        iconPanel.setLayout(new GridLayout(1, 1, 10, 10));
+        iconPanel.add(iconLabel);
 
         setLayout(new BorderLayout(10, 20));
-        add(p2, "North");
-        add(p3, "East");
-        add(p1, "Center");
+        add(headingPanel, "North");
+        add(iconPanel, "East");
+        add(loginPanel, "Center");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String username = tf.getText();
-        String password = pf.getText();
+        String username = usernameTextField.getText();
+        String password = passwordTextField.getText();
 
-        if(e.getSource() == b1) {
+        if(e.getSource() == loginButton) {
             try {
                 if (username.equals("Admin")) {
-                    if (password.equals("Password")) JOptionPane.showMessageDialog(null, "You are in.");//new Home().setVisible(true);
-                    else JOptionPane.showMessageDialog(null, "Password is not correct.");
-                } else JOptionPane.showMessageDialog(null, "Username is not correct.");
+                    if (password.equals("Password")) {
+                        this.setVisible(false);
+                        new PhoneBook().setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Password is not correct.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Username is not correct.");
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
 
-        if (e.getSource() == b2) {
+        if (e.getSource() == cancelButton) {
             this.dispose();
         }
     }
