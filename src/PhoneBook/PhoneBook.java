@@ -13,89 +13,111 @@ import java.awt.event.ActionListener;
 
 public class PhoneBook extends JFrame implements ActionListener {
     public static void main(String[] args) {
-        new PhoneBook().setVisible(true);
+        new PhoneBook();
     }
 
     JLabel phonebookLabel, phonebookIconLabel;
-    JButton entryButton, searchButton, editButton, deleteButton, backToLoginButton;
-    JPanel buttonsPanel, headingPanel, iconPanel;
+    JButton viewContactsButton, createButton, searchButton, editButton, deleteButton, backToLoginButton;
+    JPanel headingPanel, buttonsPanel, iconPanel;
     Font font, font1;
 
     PhoneBook() {
-        font = new Font("Calibri", Font.BOLD, 20);
-        font1 = new Font("Calibri", Font.BOLD, 15);
         phonebookLabel = new JLabel("Phone Book");
-        entryButton = new JButton("Entry");
+        ImageIcon tempImg1 = new ImageIcon(ClassLoader.getSystemResource("Resources/Images/phonebook.png"));
+        Image tempImg2 = tempImg1.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        ImageIcon phonebookIcon = new ImageIcon(tempImg2);
+        phonebookIconLabel = new JLabel(phonebookIcon);
+        viewContactsButton = new JButton("View Contacts");
+        createButton = new JButton("Create");
         searchButton = new JButton("Search");
         editButton = new JButton("Edit");
         deleteButton = new JButton("Delete");
         backToLoginButton = new JButton("Back to Login");
-        ImageIcon tempImg1 = new ImageIcon(ClassLoader.getSystemResource("Resources/Images/phonebook.png"));
-        Image tempImg2 = tempImg1.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-        ImageIcon phonebookIcon = new ImageIcon(tempImg2);
-        buttonsPanel = new JPanel();
         headingPanel = new JPanel();
+        buttonsPanel = new JPanel();
         iconPanel = new JPanel();
-        phonebookIconLabel = new JLabel(phonebookIcon);
+        font = new Font("Calibri", Font.BOLD, 35);
+        font1 = new Font("Calibri", Font.BOLD, 20);
 
         setTitle("Phone Book");
         setLocation(450, 250);
         setSize(450, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        phonebookLabel.setHorizontalAlignment(JLabel.CENTER);
-
-        entryButton.addActionListener(this);
-        searchButton.addActionListener(this);
-        editButton.addActionListener(this);
-        deleteButton.addActionListener(this);
-        backToLoginButton.addActionListener(this);
+        setIconImage(phonebookIcon.getImage());
 
         phonebookLabel.setFont(font);
-        entryButton.setFont(font1);
-        searchButton.setFont(font1);
-        editButton.setFont(font1);
-        deleteButton.setFont(font1);
-        backToLoginButton.setFont(font1);
+        phonebookLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        buttonsPanel.setLayout(new GridLayout(5, 1, 10, 10));
-        buttonsPanel.add(entryButton);
+        viewContactsButton.setFont(font1);
+        viewContactsButton.addActionListener(this);
+
+        createButton.setFont(font1);
+        createButton.addActionListener(this);
+
+        searchButton.setFont(font1);
+        searchButton.addActionListener(this);
+
+        editButton.setFont(font1);
+        editButton.addActionListener(this);
+
+        deleteButton.setFont(font1);
+        deleteButton.addActionListener(this);
+
+        backToLoginButton.setFont(font1);
+        backToLoginButton.addActionListener(this);
+
+        headingPanel.setLayout(new GridLayout(1, 1, 10, 10));
+        headingPanel.add(phonebookLabel);
+
+        buttonsPanel.setLayout(new GridLayout(6, 1, 10, 10));
+        buttonsPanel.add(viewContactsButton);
+        buttonsPanel.add(createButton);
         buttonsPanel.add(searchButton);
         buttonsPanel.add(editButton);
         buttonsPanel.add(deleteButton);
         buttonsPanel.add(backToLoginButton);
 
-        headingPanel.setLayout(new GridLayout(1, 1, 10, 10));
-        headingPanel.add(phonebookLabel);
-
         iconPanel.setLayout(new GridLayout(1, 1, 10, 10));
         iconPanel.add(phonebookIconLabel);
 
         setLayout(new BorderLayout(10, 20));
-        add(buttonsPanel, "Center");
         add(headingPanel, "North");
+        add(buttonsPanel, "Center");
         add(iconPanel, "East");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == entryButton) {
+        if (e.getSource() == viewContactsButton) {
             // this.setVisible(false);
-            System.out.println("Pressed Entry");
-            // new Entry().setVisible(true);
-        } else if (e.getSource() == searchButton) {
+            // new ViewContacts().setVisible(true);
+            System.out.println("Pressed View Contacts");
+        }
+
+        if (e.getSource() == createButton) {
+            this.setVisible(false);
+            new Create().setVisible(true);
+        }
+
+        if (e.getSource() == searchButton) {
             // this.setVisible(false);
-            System.out.println("Pressed Search");
             // new Search().setVisible(true);
-        } else if (e.getSource() == editButton) {
+            System.out.println("Pressed Search");
+        }
+
+        if (e.getSource() == editButton) {
             // this.setVisible(false);
-            System.out.println("Pressed Edit");
             // new Edit().setVisible(true);
-        } else if (e.getSource() == deleteButton) {
+            System.out.println("Pressed Edit");
+        }
+
+        if (e.getSource() == deleteButton) {
             // this.setVisible(false);
-            System.out.println("Pressed Delete");
             // new Delete().setVisible(true);
-        } else {
+            System.out.println("Pressed Delete");
+        }
+
+        if (e.getSource() == backToLoginButton){
             new Login().setVisible(true);
             this.dispose();
         }
