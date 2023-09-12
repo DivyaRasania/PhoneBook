@@ -1,10 +1,10 @@
 /*
  * Filename Create.java
  * Written by Divya Rasania
- * Written on 9/7/2023
+ * Written on 09/07/2023
  */
 
-package PhoneBook;
+package PhoneBookV1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,11 +22,6 @@ public class Create extends JFrame implements ActionListener {
     JPanel headingPanel, mainPanel;
     Font font, font1;
     int id;
-
-    public static void main(String[] args) {
-        // TODO: remove .setVisible(true);
-        new Create().setVisible(true);
-    }
 
     Create() {
         headingLabel = new JLabel("Add Contact");
@@ -46,12 +41,15 @@ public class Create extends JFrame implements ActionListener {
         mainPanel = new JPanel();
         font = new Font("Calibri", Font.BOLD, 35);
         font1 = new Font("Calibri", Font.BOLD, 20);
-        ImageIcon tempImg = new ImageIcon(ClassLoader.getSystemResource("Resources/Images/add-user.png"));
+        ImageIcon tempImg = new ImageIcon(ClassLoader.getSystemResource("Resources/Images/create.png"));
         Image addUserIcon = tempImg.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - (getWidth() + 500)) / 2;
+        int y = (screenSize.height - (getHeight() + 450)) / 2;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setLocation(500, 200);
+        setLocation(x, y);
         setSize(400, 450);
         setIconImage(addUserIcon);
         setTitle("Create Contact");

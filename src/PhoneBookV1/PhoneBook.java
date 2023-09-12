@@ -1,10 +1,10 @@
 /*
  * Filename PhoneBook.java
  * Written by Divya Rasania
- * Written on 9/7/2023
+ * Written on 09/07/2023
  */
 
-package PhoneBook;
+package PhoneBookV1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,14 +12,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PhoneBook extends JFrame implements ActionListener {
-    public static void main(String[] args) {
-        new PhoneBook();
-    }
-
     JLabel phonebookLabel, phonebookIconLabel;
-    JButton viewContactsButton, createButton, searchButton, editButton, deleteButton, backToLoginButton;
+    JButton createButton, viewOrSearchButton, editButton, deleteButton, backToLoginButton;
     JPanel headingPanel, buttonsPanel, iconPanel;
     Font font, font1;
+
+    public static void main(String[] args) {
+        new PhoneBook().setVisible(true);
+    }
 
     PhoneBook() {
         phonebookLabel = new JLabel("Phone Book");
@@ -27,9 +27,8 @@ public class PhoneBook extends JFrame implements ActionListener {
         Image tempImg2 = tempImg1.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
         ImageIcon phonebookIcon = new ImageIcon(tempImg2);
         phonebookIconLabel = new JLabel(phonebookIcon);
-        viewContactsButton = new JButton("View Contacts");
         createButton = new JButton("Create");
-        searchButton = new JButton("Search");
+        viewOrSearchButton = new JButton("View/Search");
         editButton = new JButton("Edit");
         deleteButton = new JButton("Delete");
         backToLoginButton = new JButton("Back to Login");
@@ -38,9 +37,12 @@ public class PhoneBook extends JFrame implements ActionListener {
         iconPanel = new JPanel();
         font = new Font("Calibri", Font.BOLD, 35);
         font1 = new Font("Calibri", Font.BOLD, 20);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - (getWidth() + 500)) / 2;
+        int y = (screenSize.height - (getHeight() + 450)) / 2;
 
         setTitle("Phone Book");
-        setLocation(450, 250);
+        setLocation(x, y);
         setSize(450, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setIconImage(phonebookIcon.getImage());
@@ -48,14 +50,11 @@ public class PhoneBook extends JFrame implements ActionListener {
         phonebookLabel.setFont(font);
         phonebookLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        viewContactsButton.setFont(font1);
-        viewContactsButton.addActionListener(this);
-
         createButton.setFont(font1);
         createButton.addActionListener(this);
 
-        searchButton.setFont(font1);
-        searchButton.addActionListener(this);
+        viewOrSearchButton.setFont(font1);
+        viewOrSearchButton.addActionListener(this);
 
         editButton.setFont(font1);
         editButton.addActionListener(this);
@@ -69,10 +68,9 @@ public class PhoneBook extends JFrame implements ActionListener {
         headingPanel.setLayout(new GridLayout(1, 1, 10, 10));
         headingPanel.add(phonebookLabel);
 
-        buttonsPanel.setLayout(new GridLayout(6, 1, 10, 10));
-        buttonsPanel.add(viewContactsButton);
+        buttonsPanel.setLayout(new GridLayout(5, 1, 10, 10));
         buttonsPanel.add(createButton);
-        buttonsPanel.add(searchButton);
+        buttonsPanel.add(viewOrSearchButton);
         buttonsPanel.add(editButton);
         buttonsPanel.add(deleteButton);
         buttonsPanel.add(backToLoginButton);
@@ -88,33 +86,24 @@ public class PhoneBook extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == viewContactsButton) {
-            // this.setVisible(false);
-            // new ViewContacts().setVisible(true);
-            System.out.println("Pressed View Contacts");
-        }
-
         if (e.getSource() == createButton) {
             this.setVisible(false);
             new Create().setVisible(true);
         }
 
-        if (e.getSource() == searchButton) {
-            // this.setVisible(false);
-            // new Search().setVisible(true);
-            System.out.println("Pressed Search");
+        if (e.getSource() == viewOrSearchButton) {
+            this.setVisible(false);
+            new ViewOrSearch().setVisible(true);
         }
 
         if (e.getSource() == editButton) {
-            // this.setVisible(false);
-            // new Edit().setVisible(true);
-            System.out.println("Pressed Edit");
+            this.setVisible(false);
+            new Edit().setVisible(true);
         }
 
         if (e.getSource() == deleteButton) {
-            // this.setVisible(false);
-            // new Delete().setVisible(true);
-            System.out.println("Pressed Delete");
+            this.setVisible(false);
+            new Delete().setVisible(true);
         }
 
         if (e.getSource() == backToLoginButton){

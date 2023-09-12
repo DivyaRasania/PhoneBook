@@ -1,5 +1,17 @@
 # PhoneBook
-This is a phone book application that lets you store, edit, delete, and search contacts using their unique ids. Whenever you create a new contact, the app will ask you for their name, phone number, email, and address, and assign them an id automatically. You can also log in to the app to secure your contacts and prevent unauthorized access. The app uses input/output operations to save and retrieve contacts from a text file. The app also has a user-friendly interface that makes it easy to manage your contacts.
+This is a phone book application that 
+lets you store, edit, delete, and search 
+contacts using their unique ids. Whenever 
+you create a new contact, the app will ask 
+you for their name, phone number, email, 
+and address, and assign them an id 
+automatically. You can also log in to the 
+app to secure your contacts and prevent 
+unauthorized access. The app uses 
+input/output operations to save and 
+retrieve contacts from a text file. 
+The app also has a user-friendly interface 
+that makes it easy to manage your contacts.
 
 # Things I learnt through this project
 1. JFrame

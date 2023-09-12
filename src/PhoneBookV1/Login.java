@@ -1,10 +1,10 @@
 /*
  * Filename Login.java
  * Written by Divya Rasania
- * Written on 9/6/2023
+ * Written on 09/06/2023
  */
 
-package PhoneBook;
+package PhoneBookV1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Login extends JFrame implements ActionListener {
-    public static void main(String[] args) {
-        new Login();
-    }
-
     JLabel welcomeLabel, usernameLabel, passwordLabel, iconLabel;
     JTextField usernameTextField;
     JPasswordField passwordTextField;
@@ -40,14 +36,17 @@ public class Login extends JFrame implements ActionListener {
         cancelButton = new JButton("Cancel");
         font = new Font("Calibri", Font.BOLD, 35);
         font1 = new Font("Calibri", Font.BOLD, 20);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - (getWidth() + 500)) / 2;
+        int y = (screenSize.height - (getHeight() + 300)) / 2;
         ImageIcon tempImg3 = new ImageIcon(ClassLoader.getSystemResource("Resources/Images/login.png"));
-        Image loginIcon = tempImg3.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        Image loginUserIcon = tempImg3.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setLocation(400, 300);
+        setLocation(x, y);
         setSize(530, 250);
-        setIconImage(loginIcon);
+        setIconImage(loginUserIcon);
         setTitle("Login PhoneBook");
 
         welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
