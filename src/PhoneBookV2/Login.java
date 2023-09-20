@@ -1,10 +1,10 @@
+package PhoneBookV2;
+
 /*
  * Filename Login.java
  * Written by Divya Rasania
  * Written on 09/06/2023
  */
-
-package PhoneBookV2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,7 +53,7 @@ public class Login extends JFrame implements ActionListener {
         setLocation(x, y);
         setSize(530, 300);
         setIconImage(loginUserIcon);
-        setTitle("Login PhoneBook");
+        setTitle("Login");
 
         welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
         welcomeLabel.setFont(font1);

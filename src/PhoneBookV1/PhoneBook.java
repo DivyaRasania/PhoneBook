@@ -31,7 +31,7 @@ public class PhoneBook extends JFrame implements ActionListener {
         viewOrSearchButton = new JButton("View/Search");
         editButton = new JButton("Edit");
         deleteButton = new JButton("Delete");
-        backToLoginButton = new JButton("Back to Login");
+        backToLoginButton = new JButton("Back to PhoneBookV2.Login");
         headingPanel = new JPanel();
         buttonsPanel = new JPanel();
         iconPanel = new JPanel();

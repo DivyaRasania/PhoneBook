@@ -1,5 +1,5 @@
 /*
- * Filename Login.java
+ * Filename PhoneBookV2.Login.java
  * Written by Divya Rasania
  * Written on 09/06/2023
  */
@@ -32,7 +32,7 @@ public class Login extends JFrame implements ActionListener {
         loginPanel = new JPanel();
         headingPanel = new JPanel();
         iconPanel = new JPanel();
-        loginButton = new JButton("Login");
+        loginButton = new JButton("PhoneBookV2.Login");
         cancelButton = new JButton("Cancel");
         font = new Font("Calibri", Font.BOLD, 35);
         font1 = new Font("Calibri", Font.BOLD, 20);
@@ -47,7 +47,7 @@ public class Login extends JFrame implements ActionListener {
         setLocation(x, y);
         setSize(530, 250);
         setIconImage(loginUserIcon);
-        setTitle("Login PhoneBook");
+        setTitle("PhoneBookV2.Login PhoneBook");
 
         welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
         welcomeLabel.setFont(font);
