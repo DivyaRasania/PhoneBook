@@ -41,7 +41,7 @@ public class Create extends JFrame implements ActionListener {
         mainPanel = new JPanel();
         font = new Font("Calibri", Font.BOLD, 35);
         font1 = new Font("Calibri", Font.BOLD, 20);
-        ImageIcon tempImg = new ImageIcon(ClassLoader.getSystemResource("Resources/Images/create.png"));
+        ImageIcon tempImg = new ImageIcon(ClassLoader.getSystemResource("Resources/Images/user.png"));
         Image addUserIcon = tempImg.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (screenSize.width - (getWidth() + 500)) / 2;

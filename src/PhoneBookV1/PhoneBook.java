@@ -92,18 +92,18 @@ public class PhoneBook extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == viewOrSearchButton) {
-            this.setVisible(false);
-            new ViewOrSearch().setVisible(true);
+//            this.setVisible(false);
+//            new ViewOrSearch().setVisible(true);
         }
 
         if (e.getSource() == editButton) {
-            this.setVisible(false);
-            new Edit().setVisible(true);
+//            this.setVisible(false);
+//            new Edit().setVisible(true);
         }
 
         if (e.getSource() == deleteButton) {
-            this.setVisible(false);
-            new Delete().setVisible(true);
+//            this.setVisible(false);
+//            new Delete().setVisible(true);
         }
 
         if (e.getSource() == backToLoginButton){
