@@ -98,14 +98,13 @@ public class Create extends JFrame implements ActionListener {
 
         if (e.getSource() == addContactButton) {
             try {
-                // TODO: change location of saved contacts file before exporting
-                FileWriter fileWriter = new FileWriter(System.getProperty("user.home") + "/Desktop/Contacts.txt", true);
+                FileWriter fileWriter = new FileWriter("out/contacts.txt", true);
                 PrintWriter printWriter = new PrintWriter(fileWriter);
 
-                printWriter.println("name: " + name + ",\n" +
-                                    "email: " + email + ",\n" +
-                                    "address: " + address + ",\n" +
-                                    "phoneNumber: " + phoneNumber + "\n");
+                printWriter.println(name + " -\n" +
+                                    phoneNumber + " -\n" +
+                                    email + " -\n" +
+                                    address + " -\n---");
 
                 isFileSaved = true;
                 printWriter.close();
@@ -124,6 +123,7 @@ public class Create extends JFrame implements ActionListener {
 
         } else if (e.getSource() == backButton) {
             this.dispose();
+            new Main().setVisible(true);
         }
     }
 }

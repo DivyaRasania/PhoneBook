@@ -1,9 +1,11 @@
 package PhoneBookV2;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Main extends JFrame {
 
@@ -16,13 +18,15 @@ public class Main extends JFrame {
         Font font = new Font("Calibri", Font.PLAIN, 20);
 
         setTitle("Phone Book");
-        setSize(750, 450);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
         ImageIcon tempImg1 = new ImageIcon(ClassLoader.getSystemResource("Resources/Images/phonebook.png"));
         Image tempImg2 = tempImg1.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
         ImageIcon phoneBookIcon = new ImageIcon(tempImg2);
         setIconImage(phoneBookIcon.getImage());
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - (getWidth() + 975)) / 2;
+        int y = (screenSize.height - (getHeight() + 825)) / 2;
+        setLocation(x, y);
         setResizable(false);
 
         // HEADER
@@ -45,6 +49,7 @@ public class Main extends JFrame {
         JButton createButton = new JButton(addIcon);
         createButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         createButton.addActionListener(e -> {
+            this.dispose();
             new Create().setVisible(true);
         });
 
@@ -60,51 +65,49 @@ public class Main extends JFrame {
         headerPanel.add(searchPanel);
 
         // CONTACTS
-        JTable tableLayout = new JTable(23, 6);
+        JTable tableLayout = new JTable(20, 6);
         tableLayout.setFont(font.deriveFont(Font.BOLD, 25));
         tableLayout.setRowHeight(30);
 
-        String[] columnNames = {"Name", "Phone Number", "Email", "Address", "Edit", "Delete"};
+        tableLayout.getColumnModel().getColumn(0).setPreferredWidth(150);
+        tableLayout.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tableLayout.getColumnModel().getColumn(2).setPreferredWidth(200);
+        tableLayout.getColumnModel().getColumn(3).setPreferredWidth(300);
+        tableLayout.getColumnModel().getColumn(4).setPreferredWidth(75);
+        tableLayout.getColumnModel().getColumn(5).setPreferredWidth(75);
 
-        // TODO: change last two column width
-        TableColumnModel tableColumnModel = tableLayout.getColumnModel();
-        TableColumn tableColumn = tableColumnModel.getColumn(4);
-        tableColumn.setPreferredWidth(50);
-        tableColumn = tableColumnModel.getColumn(5);
-        tableColumn.setPreferredWidth(50);
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setHorizontalAlignment(JLabel.CENTER);
+        renderer.setVerticalAlignment(JLabel.CENTER);
 
-        // TODO: read from file and populate table
-        // Get the table column model
-        TableColumnModel tableModel = tableLayout.getColumnModel();
-
-        // Get the table column that you set the preferred width of
-        TableColumn tableColumns = tableModel.getColumn(0);
-
-        // Get the minimum width of the column
-        int minWidth = tableColumns.getMinWidth();
-
-        // Iterate over the cells in the column and get the width of each cell
-        int maxWidth = 0;
-        for (int row = 0; row < 20; row++) {
-            Component component = tableLayout.prepareRenderer(tableLayout.getCellRenderer(row, 0), row, 0);
-            maxWidth = Math.max(maxWidth, component.getPreferredSize().width);
+        for (int i = 0; i < 6; i++) {
+            tableLayout.getColumnModel().getColumn(i).setCellRenderer(renderer);
         }
 
-// Get the table column model's auto-resize mode
-        int autoResizeMode = tableLayout.getAutoResizeMode();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("out/contacts.txt"));
+            String line;
+            int row = 0;
+            int column = 0;
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split("-");
+                String[] newContact = line.split("---");
 
-// Print the minimum width, maximum width, and auto-resize mode
-        System.out.println("Minimum width: " + minWidth);
-        System.out.println("Maximum width: " + maxWidth);
-        System.out.println("Auto-resize mode: " + autoResizeMode);
+                if (tokens.length == 1 && tokens[0].equals("---")) {
+                    row++;
+                    column = 0;
+                }
 
-        for(int column = 0; column < tableLayout.getColumnCount(); column++) {
-            tableLayout.setValueAt(columnNames[column], 0, column);
-            /*
-             * for(int row = 0; row < tableLayout.getRowCount(); row++) {
-             *   contactsFile.setValueAt("", row, column);
-             * }
-             */
+                if (tokens.length > 0) {
+                    for (int i = 0; i < tokens.length && column < tableLayout.getColumnCount(); i++) {
+                        tableLayout.setValueAt(tokens[i], 0, column);
+                    }
+                    column++;
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("contacts.txt not found");
         }
 
         JPanel contactsPanel = new JPanel();
@@ -135,5 +138,6 @@ public class Main extends JFrame {
         add(headerPanel, BorderLayout.NORTH);
         add(contactsPanel, BorderLayout.CENTER);
         add(importExportPanel, BorderLayout.SOUTH);
+        pack();
     }
 }

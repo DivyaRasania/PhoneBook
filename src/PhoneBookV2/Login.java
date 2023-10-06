@@ -23,7 +23,7 @@ public class Login extends JFrame implements ActionListener {
         usernameLabel = new JLabel("Username");
         passwordLabel = new JLabel("Password");
         ImageIcon tempImg1 = new ImageIcon(ClassLoader.getSystemResource("Resources/Images/user.png"));
-        Image tempImg2 = tempImg1.getImage().getScaledInstance(150, 150, Image.SCALE_AREA_AVERAGING);
+        Image tempImg2 = tempImg1.getImage().getScaledInstance(128, 128, Image.SCALE_AREA_AVERAGING);
         ImageIcon userIcon = new ImageIcon(tempImg2);
         iconLabel = new JLabel(userIcon);
         usernameTextField = new JTextField();
