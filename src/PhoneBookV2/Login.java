@@ -100,7 +100,7 @@ public class Login extends JFrame implements ActionListener {
         if(e.getSource() == loginButton) {
             try {
 
-                // TODO: change username and password before exporting
+                // TODO: maybe change username and password before exporting
                 if (username.equals("admin")) {
                     if (password.equals("admin")) {
                         this.setVisible(false);

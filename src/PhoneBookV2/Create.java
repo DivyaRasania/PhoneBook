@@ -64,9 +64,11 @@ public class Create extends JFrame implements ActionListener {
 
         addContactButton.setFont(font1.deriveFont(Font.BOLD));
         addContactButton.addActionListener(this);
+        addContactButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         backButton.setFont(font1.deriveFont(Font.BOLD));
         backButton.addActionListener(this);
+        backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         headingPanel.setLayout(new GridLayout(1, 1, 10, 10));
         headingPanel.add(headingLabel);
@@ -97,6 +99,16 @@ public class Create extends JFrame implements ActionListener {
         boolean isFileSaved = false;
 
         if (e.getSource() == addContactButton) {
+            try {
+                if (name.equals("") || email.equals("") || address.equals("") || phoneNumber.equals("")) {
+                    JOptionPane.showMessageDialog(this, "Please fill all the fields.");
+                    return;
+                }
+            } catch (NullPointerException e1) {
+                JOptionPane.showMessageDialog(this, "Please fill all the fields.");
+                return;
+            }
+
             try {
                 FileWriter fileWriter = new FileWriter("out/contacts.txt", true);
                 PrintWriter printWriter = new PrintWriter(fileWriter);
