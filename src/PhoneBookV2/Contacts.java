@@ -155,7 +155,7 @@ public class Contacts extends JFrame {
             int result = JOptionPane.showConfirmDialog(null, "Do you want to import the file?", "Import File",
                     JOptionPane.YES_NO_OPTION);
 
-            Path projectFolderPath = Paths.get("out");
+            Path projectFolderPath = Paths.get("src");
             Path desktopPath = Paths.get(System.getProperty("user.home"), "Desktop");
             Path projectFilePath = projectFolderPath.resolve("contacts.txt");
 
@@ -199,7 +199,7 @@ public class Contacts extends JFrame {
             int result = JOptionPane.showConfirmDialog(null, "Do you want to export the file?", "Export File",
                     JOptionPane.YES_NO_OPTION);
 
-            Path projectFolderPath = Paths.get("out");
+            Path projectFolderPath = Paths.get("src");
             Path desktopPath = Paths.get(System.getProperty("user.home"), "Desktop");
             Path projectFilePath = projectFolderPath.resolve("contacts.txt");
             LocalDate currentDate = LocalDate.now();
