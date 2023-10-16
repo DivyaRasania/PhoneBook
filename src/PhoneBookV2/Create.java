@@ -113,6 +113,11 @@ public class Create extends JFrame implements ActionListener {
         String address = addressTextField.getText();
         String phoneNumber = phoneNumberTextField.getText();
 
+        if (e.getSource() == backButton) {
+           this.dispose();
+           new Contacts().setVisible(true);
+        }
+
         // Check if all the fields are filled
         if (name.isEmpty() || email.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill all the fields.");
