@@ -113,6 +113,11 @@ public class Create extends JFrame implements ActionListener {
         String address = addressTextField.getText();
         String phoneNumber = phoneNumberTextField.getText();
 
+        if (e.getSource() == backButton) {
+           this.dispose();
+           new Contacts().setVisible(true);
+        }
+
         // Check if all the fields are filled
         if (name.isEmpty() || email.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill all the fields.");
@@ -122,7 +127,7 @@ public class Create extends JFrame implements ActionListener {
         // Write the contact details to the file
         boolean isFileSaved = false;
         try {
-            FileWriter fileWriter = new FileWriter("out/contacts.txt", true);
+            FileWriter fileWriter = new FileWriter("src/contacts.txt", true);
             PrintWriter printWriter = new PrintWriter(fileWriter);
 
             printWriter.println(name + "\t\n" +

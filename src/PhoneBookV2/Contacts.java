@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 public class Contacts extends JFrame {
 
-    JTable tableLayout = new JTable(20, 6);
+    JTable tableLayout = new JTable(20, 4);
 
     Contacts() {
         Font font = new Font("Calibri", Font.PLAIN, 20);
@@ -79,9 +79,12 @@ public class Contacts extends JFrame {
         tableLayout.getColumnModel().getColumn(1).setPreferredWidth(200);
         tableLayout.getColumnModel().getColumn(2).setPreferredWidth(325);
         tableLayout.getColumnModel().getColumn(3).setPreferredWidth(350);
+        /*
         tableLayout.getColumnModel().getColumn(4).setPreferredWidth(50);
         tableLayout.getColumnModel().getColumn(5).setPreferredWidth(75);
+        */
 
+        /*
         ImageIcon tempImgIco4 = new ImageIcon(ClassLoader.getSystemResource("Resources/Images/edit.png"));
         Image tempImg4 = tempImgIco4.getImage().getScaledInstance(24, 24, Image.SCALE_AREA_AVERAGING);
         ImageIcon editIcon = new ImageIcon(tempImg4);
@@ -98,14 +101,15 @@ public class Contacts extends JFrame {
 
         TableMouseListener tableMouseListener = new TableMouseListener();
         tableLayout.addMouseListener(tableMouseListener);
+        */
 
-        String[] columnNames = {"Name", "Phone Number", "Email", "Address", "", ""};
+        String[] columnNames = {"Name", "Phone Number", "Email", "Address"};
         for(int column = 0; column < tableLayout.getColumnCount(); column++) {
             tableLayout.setValueAt(columnNames[column], 0, column);
         }
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("out/contacts.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("src/contacts.txt"));
             String line;
             int row = 2;
             int column = 0;
@@ -173,7 +177,7 @@ public class Contacts extends JFrame {
 
                 if (ready == 0) {
                     try {
-                        Files.delete(Path.of("out/contacts.txt"));
+                        Files.delete(Path.of("src/contacts.txt"));
                         Files.copy(desktopPath.resolve("contacts.txt"), projectFilePath);
                     } catch (IOException e2) {
                         e2.printStackTrace();
