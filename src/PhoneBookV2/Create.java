@@ -8,19 +8,23 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * A class to create a new contact in the phone book.
+ */
 public class Create extends JFrame implements ActionListener {
-    JLabel headingLabel, nameLabel, phoneNumberLabel, emailLabel, addressLabel;
-    JTextField nameTextField, phoneNumberTextField, emailTextField, addressTextField;
-    JButton addContactButton, backButton;
-    JPanel headingPanel, mainPanel;
-    Font font, font1;
 
-    // TODO: Remove this psvm method
-    public static void main(String[] args) {
-        new Create().setVisible(true);
-    }
+    // Component declarations
+    private JLabel headingLabel, nameLabel, phoneNumberLabel, emailLabel, addressLabel;
+    private JTextField nameTextField, phoneNumberTextField, emailTextField, addressTextField;
+    private JButton addContactButton, backButton;
+    private JPanel headingPanel, mainPanel;
 
-    Create() {
+    // Font declarations
+    private Font font, font1;
+
+    // Constructor
+    public Create() {
+        // Initialize component values
         headingLabel = new JLabel("Add Contact");
         nameLabel = new JLabel("Name");
         phoneNumberLabel = new JLabel("Phone Number");
@@ -36,19 +40,19 @@ public class Create extends JFrame implements ActionListener {
         mainPanel = new JPanel();
         font = new Font("Calibri", Font.BOLD, 35);
         font1 = new Font("Calibri", Font.PLAIN, 20);
+
+        // Load the user icon
         ImageIcon tempImg = new ImageIcon(ClassLoader.getSystemResource("Resources/Images/user.png"));
         Image addUserIcon = tempImg.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (screenSize.width - (getWidth() + 500)) / 2;
-        int y = (screenSize.height - (getHeight() + 450)) / 2;
 
+        // Set frame properties
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
-        setLocation(x, y);
         setSize(400, 400);
         setIconImage(addUserIcon);
         setTitle("Create Contact");
 
+        // Set component fonts
         headingLabel.setFont(font);
         headingLabel.setHorizontalAlignment(JLabel.CENTER);
 
@@ -70,6 +74,7 @@ public class Create extends JFrame implements ActionListener {
         backButton.addActionListener(this);
         backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
+        // Set panel layouts
         headingPanel.setLayout(new GridLayout(1, 1, 10, 10));
         headingPanel.add(headingLabel);
 
@@ -85,57 +90,64 @@ public class Create extends JFrame implements ActionListener {
         mainPanel.add(addContactButton);
         mainPanel.add(backButton);
 
+        // Set frame layout
         setLayout(new BorderLayout(10, 20));
         add(headingPanel, "North");
         add(mainPanel, "Center");
+
+        // Pack the frame
+        pack();
+
+        // Set the frame to visible
+        setVisible(true);
     }
 
+    /**
+     * Handles button
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        String name = nameTextField.getText(),
-               email = emailTextField.getText(),
-               address = addressTextField.getText(),
-               phoneNumber = phoneNumberTextField.getText();
-        boolean isFileSaved = false;
+        // Get the contact details from the text fields
+        String name = nameTextField.getText();
+        String email = emailTextField.getText();
+        String address = addressTextField.getText();
+        String phoneNumber = phoneNumberTextField.getText();
 
-        if (e.getSource() == addContactButton) {
-            try {
-                if (name.equals("") || email.equals("") || address.equals("") || phoneNumber.equals("")) {
-                    JOptionPane.showMessageDialog(this, "Please fill all the fields.");
-                    return;
-                }
-            } catch (NullPointerException e1) {
-                JOptionPane.showMessageDialog(this, "Please fill all the fields.");
-                return;
-            }
-
-            try {
-                FileWriter fileWriter = new FileWriter("out/contacts.txt", true);
-                PrintWriter printWriter = new PrintWriter(fileWriter);
-
-                printWriter.println(name + " -\n" +
-                                    phoneNumber + " -\n" +
-                                    email + " -\n" +
-                                    address + " -\n---");
-
-                isFileSaved = true;
-                printWriter.close();
-                fileWriter.close();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-
-            if (!isFileSaved) {
-                JOptionPane.showMessageDialog(this, "There was an error saving the contact.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Contact created successfully!");
-            }
-            this.dispose();
-            new Create().setVisible(true);
-
-        } else if (e.getSource() == backButton) {
-            this.dispose();
-            new Main().setVisible(true);
+        // Check if all the fields are filled
+        if (name.isEmpty() || email.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill all the fields.");
+            return;
         }
+
+        // Write the contact details to the file
+        boolean isFileSaved = false;
+        try {
+            FileWriter fileWriter = new FileWriter("out/contacts.txt", true);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+
+            printWriter.println(name + "\t\n" +
+                    phoneNumber + "\t\n" +
+                    email + "\t\n" +
+                    address + "\t\n---");
+
+            isFileSaved = true;
+            printWriter.close();
+            fileWriter.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+        // Show a message to the user
+        if (!isFileSaved) {
+            JOptionPane.showMessageDialog(this, "There was an error saving the contact.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Contact created successfully!");
+        }
+
+        // Close the frame
+        this.dispose();
+
+        // Open the main frame
+        new Contacts().setVisible(true);
     }
 }
